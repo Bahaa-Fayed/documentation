@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+
+{% block title %}الحسابات - مدير المصروفات{% endblock %}
+{% block page_title %}الحسابات{% endblock %}
+
+{% block page_actions %}
+<button class="btn btn-primary">
+    <i class="bi bi-plus-circle"></i>
+    إضافة حساب جديد
+</button>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">قائمة الحسابات</h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>اسم الحساب</th>
+                        <th>النوع</th>
+                        <th>الرصيد</th>
+                        <th>العملة</th>
+                        <th>الحالة</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for account in accounts %}
+                    <tr>
+                        <td>{{ account.name }}</td>
+                        <td>
+                            <span class="badge bg-info">{{ account.get_account_type_display }}</span>
+                        </td>
+                        <td class="{% if account.current_balance >= 0 %}text-success{% else %}text-danger{% endif %}">
+                            {{ account.get_formatted_balance }}
+                        </td>
+                        <td>{{ account.currency.code }}</td>
+                        <td>
+                            {% if account.is_active %}
+                                <span class="badge bg-success">نشط</span>
+                            {% else %}
+                                <span class="badge bg-secondary">معطل</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            لا توجد حسابات حتى الآن
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

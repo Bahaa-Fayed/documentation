@@ -1,0 +1,140 @@
+{% extends 'base/base.html' %}
+
+{% block title %}مدير المصروفات - الرئيسية{% endblock %}
+{% block page_title %}الرئيسية{% endblock %}
+
+{% block content %}
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <i class="bi bi-arrow-up-circle fs-1 mb-2"></i>
+                <h4>المجموع</h4>
+                <h2>0.00</h2>
+                <small>الدخل الشهري</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <i class="bi bi-arrow-down-circle fs-1 mb-2"></i>
+                <h4>المجموع</h4>
+                <h2>0.00</h2>
+                <small>المصروفات الشهرية</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <i class="bi bi-wallet2 fs-1 mb-2"></i>
+                <h4>المجموع</h4>
+                <h2>0.00</h2>
+                <small>إجمالي الأرصدة</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <i class="bi bi-bullseye fs-1 mb-2"></i>
+                <h4>العدد</h4>
+                <h2>0</h2>
+                <small>الأهداف النشطة</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">إجراءات سريعة</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <a href="{% url 'transactions:transaction_list' %}" class="btn btn-primary w-100 py-3">
+                            <i class="bi bi-plus-circle fs-3"></i><br>
+                            <span>إضافة معاملة</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="#" class="btn btn-success w-100 py-3">
+                            <i class="bi bi-bank fs-3"></i><br>
+                            <span>إضافة حساب</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="#" class="btn btn-warning w-100 py-3">
+                            <i class="bi bi-piggy-bank fs-3"></i><br>
+                            <span>إنشاء ميزانية</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="#" class="btn btn-info w-100 py-3">
+                            <i class="bi bi-graph-up fs-3"></i><br>
+                            <span>تقرير</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Transactions -->
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">المعاملات الحالية</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>التاريخ</th>
+                                <th>الوصف</th>
+                                <th>الحساب</th>
+                                <th>المبلغ</th>
+                                <th>النوع</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    لا توجد معاملات حتى الآن
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Budget Progress -->
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">الميزانية الشهرية</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <span class="fs-4 text-muted">لا توجد ميزانية نشطة</span>
+                </div>
+                <div class="progress mb-2" style="height: 10px;">
+                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+                <small>0% من الميزانية الشهرية</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

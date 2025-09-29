@@ -1,0 +1,89 @@
+{% extends 'base/base.html' %}
+
+{% block title %}التصنيفات - مدير المصروفات{% endblock %}
+{% block page_title %}التصنيفات{% endblock %}
+
+{% block page_actions %}
+<button class="btn btn-primary">
+    <i class="bi bi-plus-circle"></i>
+    إضافة تصنيف جديد
+</button>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">قائمة التصنيفات</h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>الاسم</th>
+                        <th>النوع</th>
+                        <th>التصنيف الأب</th>
+                        <th>حد الميزانية</th>
+                        <th>الحالة</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>
+                            <span class="badge" style="background-color: {{ category.color }}25; color: {{ category.color }};">
+                                <i class="{{ category.icon }}"></i>
+                            </span>
+                            {{ category.name }}
+                        </td>
+                        <td>
+                            {% if category.category_type == 'income' %}
+                                <span class="badge bg-success">دخل</span>
+                            {% elif category.category_type == 'expense' %}
+                                <span class="badge bg-danger">مصروف</span>
+                            {% else %}
+                                <span class="badge bg-info">تحويل</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if category.parent %}
+                                {{ category.parent.name }}
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if category.budget_limit %}
+                                {{ category.budget_limit|floatformat:2 }}
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if category.is_active %}
+                                <span class="badge bg-success">نشط</span>
+                            {% else %}
+                                <span class="badge bg-secondary">معطل</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            لا توجد تصنيفات حتى الآن
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
